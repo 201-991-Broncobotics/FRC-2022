@@ -40,7 +40,7 @@ public class Drivetrain
 
         double sum = Math.abs(xVal) + Math.abs(yVal);
 
-        if(sum<1){
+        if(sum>1){
             xVal /= sum;
             yVal /= sum;
         }
