@@ -7,9 +7,11 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
 
+
 public class Drivetrain
 {
     // defines the motors and other sensors
+    private DifferentialDrivetrain DriveT;
     VictorSPX frontLeft;
     VictorSPX frontRight;
     VictorSPX backLeft;
@@ -30,7 +32,8 @@ public class Drivetrain
         // reverses motors so that you ovefoward with positive values
         frontLeft.setInverted(true);
         backLeft.setInverted(true);
-    
+
+        DriveT = new DifferentialDrivetrain(__frontLeft__, __frontRight__, __backLeft__, __backRight__);
 
     }
 
@@ -71,6 +74,9 @@ public class Drivetrain
             backRight.set(ControlMode.PercentOutput, right);
         }
      
+    }
+    public void DiffDrive(double l, double r){
+        DriveT.drive(l, r);
     }
     
 
