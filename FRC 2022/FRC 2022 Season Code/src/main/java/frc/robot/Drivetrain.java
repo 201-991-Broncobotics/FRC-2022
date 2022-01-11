@@ -8,18 +8,18 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
 
 
-public class Drivetrain
+public class Drivetrain implements Variables
 {
     // defines the motors and other sensors
-    private DifferentialDrivetrain DriveT;
+ 
     VictorSPX frontLeft;
     VictorSPX frontRight;
     VictorSPX backLeft;
     VictorSPX backRight;
     BuiltInAccelerometer gyro = new BuiltInAccelerometer();
-    boolean strafing = true;
-    double gyro_angle_ref = 0;
+  
     double slowDownFactor = 1;
+    final double driving_scale_const = 0.3;
 
     public Drivetrain(int __frontLeft__, int __frontRight__, int __backLeft__, int __backRight__)
     {
@@ -33,22 +33,21 @@ public class Drivetrain
         frontLeft.setInverted(true);
         backLeft.setInverted(true);
 
-        DriveT = new DifferentialDrivetrain(__frontLeft__, __frontRight__, __backLeft__, __backRight__);
-
     }
 
     public void TankDrive(double yVal, double xVal){
         xVal = deadZone(xVal);
         yVal = deadZone(yVal);
-
-        double sum = Math.abs(xVal) + Math.abs(yVal);
-
-        if(sum>1){
-            xVal /= sum;
-            yVal /= sum;
+        if(3*yVal > xVal){
+            //turn
+            setPower(xVal, -xVal, true);
+        }else if(xVal > 0){
+            //right curve
+            setPower(yVal, yVal - (driving_scale_const * xVal * yVal), true);
+        }else if(xVal <= 0){
+            //left curve
+            setPower(yVal - (driving_scale_const * -xVal * yVal), yVal, true);
         }
-
-        setPower(xVal+yVal, -xVal+yVal, true);
     }
 
     private double deadZone(double val){
@@ -75,9 +74,7 @@ public class Drivetrain
         }
      
     }
-    public void DiffDrive(double l, double r){
-        DriveT.drive(l, r);
-    }
+ 
     
 
     
