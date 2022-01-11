@@ -4,12 +4,13 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.Subsystems.*;
 
 
 
 public class Robot extends TimedRobot {
   private final Joystick gamepad = new Joystick(0);
-
+  private Limelight limelight;
   private Drivetrain dT;
 
   @Override
@@ -30,11 +31,11 @@ public class Robot extends TimedRobot {
     double rsx = (double) gamepad.getRawAxis(4);
     double r_trigger = (double) gamepad.getRawAxis(2);
 
-    if(r_trigger > 0.2){
-      dT.slowDownFactor = 2;
-    }else{
-      dT.slowDownFactor = 1;
-    }
+    limelight.showTelemetry();
+
+
+    dT.slowDownFactor = (r_trigger > 0.2) ? 2 : 1;
+   
 
     dT.TankDrive(lsy, lsx);
 

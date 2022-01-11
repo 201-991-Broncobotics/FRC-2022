@@ -1,10 +1,11 @@
-package frc.robot;
+package frc.Subsystems;
 
 import javax.xml.xpath.XPathEvaluationResult;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import frc.robot.Variables;
 
 
 
@@ -18,9 +19,8 @@ public class Drivetrain implements Variables
     VictorSPX backRight;
     BuiltInAccelerometer gyro = new BuiltInAccelerometer();
   
-    double slowDownFactor = 1;
-    final double driving_scale_const = 0.3;
-
+    public double slowDownFactor = 1;
+   
     public Drivetrain(int __frontLeft__, int __frontRight__, int __backLeft__, int __backRight__)
     {
         // defines names for the motors
