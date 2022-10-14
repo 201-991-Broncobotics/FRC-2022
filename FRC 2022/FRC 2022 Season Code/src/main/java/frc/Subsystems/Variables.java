@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.Subsystems;
 
 public interface Variables {
     public final double deadZone = 0.05;
