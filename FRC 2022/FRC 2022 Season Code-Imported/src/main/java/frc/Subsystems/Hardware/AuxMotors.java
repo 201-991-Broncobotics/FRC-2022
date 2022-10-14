@@ -1,6 +1,6 @@
 package frc.Subsystems.Hardware;
 
-import javax.xml.xpath.XPathEvaluationResult;
+
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
@@ -9,7 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
+
 import frc.Subsystems.Variables;
 
 

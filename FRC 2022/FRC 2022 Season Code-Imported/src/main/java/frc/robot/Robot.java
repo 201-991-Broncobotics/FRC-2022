@@ -1,12 +1,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Solenoid;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
-import frc.Subsystems.*;
+
 import frc.Subsystems.Hardware.*;
 import frc.Subsystems.ObjectiveController.*;
 import frc.Subsystems.DriverController.*;
@@ -25,8 +25,8 @@ public class Robot extends TimedRobot {
   private ObjectiveController oC;
   private DriverController dC;
   private DigitalInput sensorLimit;
-  private double startTime;
-  private double elapsedTime;
+ // private double startTime;
+ // private double elapsedTime;
 
 
 
@@ -83,8 +83,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit(){
-    startTime = Timer.getFPGATimestamp();
-    double startPosition = dT.position();
+   //startTime = Timer.getFPGATimestamp();
+   // double startPosition = dT.position();
   }
 
 
@@ -93,7 +93,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic(){
-    elapsedTime = Timer.getFPGATimestamp() - startTime;
+   // elapsedTime = Timer.getFPGATimestamp() - startTime;
 
     dT.travelTo(0);
     
