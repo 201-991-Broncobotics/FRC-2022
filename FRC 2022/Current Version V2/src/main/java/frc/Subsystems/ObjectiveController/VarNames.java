@@ -22,4 +22,9 @@ public class VarNames {
 
     boolean lb_motor = false;
     boolean rb_motor = false;
+
+    boolean bottom = true;
+    boolean shooter_backward = false;
+    boolean sameer_thing = false;
+    boolean already_running = false;
 }

@@ -1,6 +1,8 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -24,7 +26,7 @@ public class Robot extends TimedRobot {
   private AuxMotors aM;
   private ObjectiveController oC;
   private DriverController dC;
-  private DigitalInput sensorLimit;
+
  // private double startTime;
  // private double elapsedTime;
 
@@ -43,7 +45,13 @@ public class Robot extends TimedRobot {
 
     oC = new ObjectiveController(aM, dT);
     dC = new DriverController(aM, dT);
-    sensorLimit = new DigitalInput(0);
+   
+
+    UsbCamera camera = CameraServer.startAutomaticCapture();
+   
+    camera.setResolution(256, 256);
+    camera.setFPS(15);
+
 
   }
 
@@ -69,7 +77,7 @@ public class Robot extends TimedRobot {
     oC.buttons(gamepad2);
     oC.stick(gamepad2);
 
-    dC.climb(gamepad1, sensorLimit.get());
+    dC.climb(gamepad1);
     dC.checkToggle(gamepad1);
 
   }
@@ -85,15 +93,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit(){
    //startTime = Timer.getFPGATimestamp();
    // double startPosition = dT.position();
-  }
-
-
-
-
-
-  @Override
-  public void autonomousPeriodic(){
-   // elapsedTime = Timer.getFPGATimestamp() - startTime;
+    // elapsedTime = Timer.getFPGATimestamp() - startTime;
 
     dT.travelTo(0);
     
@@ -127,17 +127,28 @@ public class Robot extends TimedRobot {
     dT.travelTo(0);
 
     autonomousShoot();
+
+    
+  }
+
+
+
+
+
+  @Override
+  public void autonomousPeriodic(){
+  
     
   }
 
 public void autonomousShoot(){
-  aM.manualShooter(1);
+  aM.manualShooter(-0.75);
 
-  Timer.delay(2);
+  Timer.delay(1.75);
 
-  aM.setStorage(1);
+  aM.setStorage(0.6);
 
-  Timer.delay(1);
+  Timer.delay(0.75);
 
   aM.setStorage(0);
 
@@ -145,15 +156,15 @@ public void autonomousShoot(){
 }
 
 public void dropIntake(){
-    aM.setIntakeAngle(0.2);
+  aM.setIntakeAngle(-0.7);
 
-    Timer.delay(3);
+  Timer.delay(0.75);
 
-    aM.setIntakeAngle(0);
+  aM.setIntakeAngle(0);
 
-    aM.setIntake(0.5);
+  aM.setIntake(0.5);
 
-    aM.setStorage(0.6);
+  Timer.delay(1.05);
 }
 
 }

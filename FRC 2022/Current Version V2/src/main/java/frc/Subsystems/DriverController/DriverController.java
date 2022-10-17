@@ -3,12 +3,15 @@ package frc.Subsystems.DriverController;
 import frc.Subsystems.Hardware.*;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 
 public class DriverController {
     private Drivetrain dT;
     private AuxMotors aM;
     private boolean a_past = false;
     private boolean dt_state = true;
+    private boolean bottom = true;
+
 
 
     public DriverController(AuxMotors _a, Drivetrain _d){
@@ -16,15 +19,20 @@ public class DriverController {
             aM = _a;
     } 
 
-    public void climb(Joystick gamepad, boolean var){
-        if(!var){
-            aM.climb1(gamepad.getRawButton(6) ? 0.7 : (gamepad.getRawAxis(3) > 0.1) ? -0.7 : 0);    
-        }else if(gamepad.getRawButton(6)){
-            aM.climb1(0.4);
-        }else{
-            aM.climb1(0);
+    public void triggeredButton(){
+        bottom = true;
+    }
+
+    public void climb(Joystick gamepad){
+        if(!bottom){
+            aM.climb1(gamepad.getRawAxis(2) > 0.1 ? -1 : (gamepad.getRawAxis(3) > 0.1) ? 1 : 0);    
+        }else if(bottom && gamepad.getRawButton(4) && gamepad.getRawAxis(2) > 0.1 ){
+            bottom = !bottom;
+        }else if(gamepad.getRawAxis(3) > 0.1){
+            bottom = false;
+            aM.climb1(1);
+            Timer.delay(1.5);
         }
- 
         
     }
 
