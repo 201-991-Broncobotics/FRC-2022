@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
     dT = new Drivetrain(0, 2, 7, 1);
 
     // In   Out   Conveyor   Angle  Climb1  Climb2 
-    aM = new AuxMotors(5, 6, 3, 4, 8, 9);
+    aM = new AuxMotors(5, 6, 4, 3, 8, 9);
 
 
     oC = new ObjectiveController(aM, dT);
